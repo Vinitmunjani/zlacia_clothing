@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+{% load static %}
+ 
+
+{% block title %}ZLACIÀ{% endblock %}
+
+
+
+{% block head %}<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+<style> 
+
+
+</style>
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+{% for category in categories %}
+
+<section class="{% if forloop.first %}first-section{% else %}background1{% endif %}" style= "background-image: url(media/{{category.background_image}});">
+   
+    <div class="overlay"></div>
+
+    <div class="slogen hidden">
+
+        <h1>
+        {{category.slogen}}
+        </h1>
+    </div>
+    
+    <div class="btn-container">
+        <div class="btn">  <a href=products/{{category.link_path}}>view more</a>
+      
+         </div>
+
+
+
+
+
+
+</section>
+{% if forloop.counter == 2 %}
+<section class="suggestions">
+    <h1>Products you may like!</h1>
+  
+    <!-- Custom section after the second category -->
+  
+    <div class="product-slider">
+      {% for product in products %}
+      <div class="product-card">
+        <a href="{% url 'get_product' product.slug %}">
+            <img src="media/{{product.product_images.first.image}}" alt="Product Image">
+        </a>
+       
+        <h2 class="product-name"><a href="{% url 'get_product' product.slug %}">{{ product.product_name }}</a></h2>
+        <div class="buy_btn">
+          <a href="{% url 'get_product' product.slug %}"><button>buy now</button></a>
+          </div>
+        <!-- <p class="discounted-price">₹ {{ product.discounted_price }}</p>-->
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+      
+  {% endif %}
+
+
+
+  
+{% endfor %}
+
+
+
+
+<script>
+    $(document).ready(function(){
+      $('.product-slider').slick({
+        slidesToShow: 4, // Number of visible slides
+        slidesToScroll: 1, // Number of slides to scroll
+        autoplay: true, // Enable autoplay
+     
+        dots: true, // Display navigation dots
+        prevArrow: '<button class="slick-prev">Previous</button>',
+        nextArrow: '<button class="slick-next">Next</button>',
+      });
+    });
+  </script>
+
+
+
+
+
+
+
+{% endblock %}

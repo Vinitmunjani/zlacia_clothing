@@ -1,0 +1,16 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/payment.css' %}">
+
+
+<div class="summary">
+    <div class="summart_description">
+        <p class="total">Total: ₹ {{ bag_obj.get_bag_total }}</p>
+        <p class="tax">INCLUDING GST</p>
+        <p class="ship">EXCL SHIPPING COST</p>
+    </div>
+
+    <a href="{% url 'address' %}"><button class="checkout-btn">Checkout</button></a>
+</div>
+{% endblock %}

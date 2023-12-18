@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head> 
+
+    <meta charset="UTF-8">
+    <meta name="description" content="Elevate your wardrobe with exclusive plain and printed t-shirts, oversized tees, hoodies, and finely embroidered styles at [Your Store Name].">
+    <meta name="keywords" content="luxury clothing, plain t-shirts, printed t-shirts, oversized tees, hoodies, embroidered styles, high-end fashion">
+    <meta name="author" content="vinit munjani">  
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Add this in the head section of your HTML -->
+    <link rel="icon" href="/media/images/helper_images/logo_icon.png" type="image/x-icon" sizes="16X16">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
+
+<!-- Add this at the end of the body section, before your own script tags -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
+
+
+      <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+   <script src="{% static 'js/script.js' %}"></script>
+ 
+    {% block head %}{% endblock %}
+  
+ 
+</head>
+<body>
+  <div class="top-loader" id="top-loader"></div>
+
+  <div class="container" id="container">
+   
+    <div class="container__left">
+      <div class="menu"> 
+      
+        <div class="menu_btn"><a href="#">menu</a></div></div>
+    
+
+        <div id="search-container">
+          <button id="search-btn" onclick="showSearchForm()">Search</button>
+          <form id="search-form" action="{% url 'search' %}" method="get">
+              <input type="text" id="search-input" placeholder="Enter your search" name="q">
+              <button type="submit" id="submit_btn"><img src="{% static 'icons/search.png'%}" alt=""></button>
+              <button type="button" onclick="cancelSearch()" id="cancel_btn"><img src="{% static 'icons/cancel.png'%}" alt="cancel"></button>
+          </form>
+      </div>
+
+        
+      </div>
+ 
+    <div class="container__center">
+      <div class="logo"><a href="/"><h1>ZLACIÀ</h1></a></div>
+    </div>
+    <div class="container__right">
+      <div class="signin-signout"><a href="{% if user.is_authenticated %}{% url 'logout'%}{% else %}{% url 'user_login' %}  {% endif %}  " {% if user.is_authenticated %} id="sign-out-btn" {% endif %}>{% if user.is_authenticated %}{{user.username}}{% else %} sign in {% endif %}</a></div>
+      
+      <div class="wishlist">      <a href="{% url 'wishlist' %}">
+        wishlist
+        {% if has_items_in_wishlist %} <span class="notification-dot"></span> {% endif %}
+    </a></div>
+    
+      <div class="bag"><a href="{% url 'bag' %}">bag</a></div>
+      <a href="#" id="profile-btn">profile</a>
+
+    </div>
+</div>
+<div id="profile-menu">
+    <p id="username">username : {{ user.username }}</p>
+    <p id="email">Email: {{ user.email }}</p>
+    <p id="phone"> {% with user_profile=request.user.userprofile %}
+      {% if user_profile %}
+          <p>Mobile: {{ user_profile.mobile }}</p>
+      {% endif %}
+  {% endwith %}</p>
+    <p id="address"> address :{% if user and user.useradd %}
+      <p>Full Name: {{ user.useradd.full_name }}</p>
+      <p>Address Line 1: {{ user.useradd.addressline1 }}</p>
+      <p>Address Line 2: {{ user.useradd.addressline2 }}</p>
+      <p>Pincode: {{ user.useradd.pincode }}</p>
+      <p>City: {{ user.useradd.city }}</p>
+      <p>State: {{ user.useradd.state }}</p>
+  {% else %}
+      <p>No address available.</p>
+  {% endif %}</p>
+    <button id="edit-details-btn">Edit Details</button>
+</div>
+  
+ 
+    {% block content %}    {% endblock %}
+  </div> <div id="stopPoint"></div>
+    <footer>
+     
+     <div class="content" >
+
+      <div class="link-box">
+        <h1>more</h1>
+        <div class="links">
+          <p>Terms of use</p>
+          <p>privacy policy</p>
+          <p>Return policy</p>
+          
+        </div>
+
+
+      </div>
+      <div class="link-box">
+        <h1>Quick Links</h1>
+        <div class="links">
+          <p>T-shirts</p>
+          <p>Hoodies</p>
+          <p>Sweatshirts</p>
+          <p>Embroideried</p>
+        </div>
+
+
+      </div>
+      <div class="link-box">
+        <h1>Information</h1>
+        <div class="links">
+          <p>About Us</p>
+          <p>Contact</p>
+
+        </div>
+        
+
+
+      </div>
+      <div class="link-box">
+        <h1 >Subscibe Our News Letter</h1>
+        <div class="news-letter">
+          <form action="" method="post">
+            <input type="email" class="sub-email" id="sub-email" placeholder="email">
+            <input type="submit" value="Subscibe" class="sub-email-submit">
+          </form>
+      
+
+        </div>
+
+     </div>
+     </div>
+     <div class="footer-logo">
+      <div class="logo-text">
+        <h1>ZLACIÀ</h1>
+      </div>
+     </div>
+     <div class="socials">
+      <div class="social_media">
+        <img src="{% static 'icons/instagram.png' %}" alt="" >
+        <img src="{% static 'icons/facebook.png' %}" alt="" >
+        <img src="{% static 'icons/twitter.png' %}" alt="" >
+        <img src="{% static 'icons/pintrest.png' %}" alt="" >
+        <img src="{% static 'icons/youtube.png' %}" alt="" >
+      </div>
+     </div>
+    </footer>
+
+</body>
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Add the following script in your HTML or a separate JS file -->
+<script>
+ function showSearchForm() {
+        document.getElementById("search-btn").style.opacity = "0";
+        document.getElementById("search-btn").style.transform = "translateY(-100%)";
+        setTimeout(() => {
+            document.getElementById("search-form").style.display = "flex";  // or "block"
+            document.getElementById("search-form").style.opacity = "1";
+            document.getElementById("search-form").style.transform = "translateX(0%)";
+            document.getElementById("search-input").focus();
+        }, 300); // Wait for the transition to complete
+    }
+
+
+
+    function cancelSearch() {
+        document.getElementById("search-form").style.opacity = "0";
+        document.getElementById("search-form").style.transform = "translateY(100%)";
+        setTimeout(() => {
+            document.getElementById("search-btn").style.opacity = "1";
+            document.getElementById("search-btn").style.transform = "translateX(0%)";
+            document.getElementById("search-form").style.display = "none";
+        }, 300); // Wait for the transition to complete
+    }
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Get the sign-out button element
+      var signOutBtn = document.getElementById('sign-out-btn');
+  
+      // Add click event listener to the sign-out button
+      signOutBtn.addEventListener('click', function() {
+          // Show a SweetAlert2 confirmation popup
+          Swal.fire({
+              title: 'Are you sure?',
+              text: 'You will be signed out!',
+              
+              showCancelButton: true,
+              confirmButtonColor: '#000000',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes, sign me out!'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  // Perform the sign-out action here
+                  var xhr = new XMLHttpRequest();
+
+            // Construct the URL by appending itemId to the base URL
+            
+                 
+                  xhr.send()
+                  
+
+
+
+                  // For example, redirect to the sign-out URL or call your sign-out function
+                  
+                  // or
+                  // performSignOut();
+                  
+                  window.location.reload()
+              }
+          });
+      });
+  });
+  </script>
+  <script>
+    document.getElementById('profile-btn').addEventListener('click', function () {
+        var profileMenu = document.getElementById('profile-menu');
+        profileMenu.style.display = (profileMenu.style.display === 'block') ? 'none' : 'block';
+        
+        profileMenu.style.right = '0px';
+        
+    });
+
+    document.getElementById('edit-details-btn').addEventListener('click', function () {
+        // Add your logic for handling the "Edit Details" button click
+        alert('Edit Details button clicked');
+    });
+  </script>
+    
+
+</html> 

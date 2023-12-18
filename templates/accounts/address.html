@@ -1,0 +1,92 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/address.css' %}">
+<section class="address">
+
+    {% if addresses %}
+    
+    <div class="user_addresses">
+        <div class="user_address">
+            {% for address in addresses %}
+            {{address.full_name}}<br>
+            {{ address.addressline1 }}<br>
+            {{ address.addressline2 }}<br>
+            {{ address.city }}<br>
+            {{ address.state }}<br>
+            {{ address.pincode }}<br>
+           
+            <a href=""><button  class="old_address_btn">
+               continue with this address
+            </button></a>
+            <a href="{% url 'edit_address_page' address.uid %}"><button  class="edit_address">
+                edit address
+             </button></a>
+        </div>
+      
+         {% endfor %}
+      
+
+ 
+    </div>
+ 
+    <a href="{% url 'add_address' %}"><button>
+        add new address
+     </button></a>
+
+  
+    {% else %}
+    you have no addresses saved 
+    {% endif %}
+    
+    
+  
+</section>
+<div class="summary">
+    <div class="summart_description">
+        <p class="total">Total: ₹ {{ bag_obj.get_bag_total   }}</p>
+        <p class="tax">INCLUDING GST</p>
+        <p class="ship">EXCL SHIPPING COST</p>
+    </div>
+
+    <a href="#"><button class="checkout-btn" id="rzp-button1">Checkout</button></a>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    var options = {
+        "key": "rzp_test_cfTwpv4L27w4RE", // Enter the Key ID generated from the Dashboard
+        "amount": "{{ payment.amount }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "ZLACIÀ",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            window.location.href = `http://127.0.0.1:8000/accounts/payment_success/?razorpay_payment_id=${response.razorpay_payment_id}&razorpay_order_id=${response.razorpay_order_id}&razorpay_signature=${response.razorpay_signature}`
+        },
+     
+      
+        "theme": {
+            "color": "#000000"
+        }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.on('payment.failed', function (response){
+            alert(response.error.code);
+            alert(response.error.description);
+            alert(response.error.source);
+            alert(response.error.step);
+            alert(response.error.reason);
+            alert(response.error.metadata.order_id);
+            alert(response.error.metadata.payment_id);
+    });
+    document.getElementById('rzp-button1').onclick = function(e){
+        rzp1.open();
+        e.preventDefault();
+    }
+    </script>
+
+{% endblock %}

@@ -1,0 +1,258 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}
+{{product_obj.product_name}}
+
+{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static  'css/product.css' %}">
+
+
+<!-- Link Swiper's CSS -->
+
+{% endblock %}
+{% block content %}
+
+ <!--==Product-Page=================================-->
+    <section class="product-page">
+    <div class="product-details">
+        <!--**Img*************************-->
+        <div class="product-img">
+
+        <!-- Swiper Slider -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+            
+            <!--**1******-->
+            {% for img in product_images.all %}
+            {% if forloop.counter > 1 %}
+        <div class="swiper-slide">
+            <img src="/media/{{ img.image }}" alt="{{ product_obj.product_name }}" />
+        </div>
+    {% endif %}
+            {% endfor %}
+          
+            </div>
+
+            <!--btns-->
+            <div class="slider-btns">
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next">
+                 
+                </div>
+            </div>
+        </div>
+
+
+            <!--social-->
+      
+        </div>
+        <!--**Text************************-->
+        <div class="product-text">
+            <!--category-->
+            <span class="product-category">{{ product_obj.category}}</span>
+            <h3>{{product_obj.product_name}}</h3>
+            <span class="product-price">₹ {{product_obj.discounted_price}}</span>
+           <h5>(M.R.P. incl. of all taxes)</h5>
+          
+
+            <!--size-->
+            <form method="post" action="{% url 'add_to_wishlist_or_bag' product_obj.uid %}">
+              {% csrf_token %}
+             
+
+              <div class="product-size-container">
+
+                {% if product_obj.size_variant.count %}
+                  <strong>Select Size:-</strong>
+  
+                  <div class="product-size">
+                      {% for size in product_obj.size_variant.all %}
+                  
+                      <!--xl-->
+                      <input type="radio" class="s-checkbox" id="s-{{size.size_name}}" name="size_name"value="{{size.size_name}}" required>
+                      <label for="s-{{size.size_name}}" class="s-label">{{size.size_name}}</label>
+                      {% endfor %}
+                    </div>
+              </div>
+                    {% if product_obj.color_variant.all %}
+                      <div class="product-color-container">
+                          <strong>Select color:-</strong>
+                        <div class="color-selector">
+                      
+                          {% for color in product_obj.color_variant.all %}
+                          <div class="color" style="background-color:#{{ color.color_code }} ;" data-color="{{color.color_name}}"></div>
+                          {% endfor%}
+
+                          <!-- Add more color options as needed -->
+                      </div>
+                     
+                     
+                    
+  
+                 
+                  </div>
+              </div>
+              {% endif %}
+
+              <div class="product-counter-container">
+                <strong>Quentity:-</strong>
+                <div class="product-color-container">
+
+                  <button class="counter-button" id="decrease" type="button">-</button>
+                  <span class="counter-value" id="quantityDisplay">1</span>
+                  <button class="counter-button" id="increase" type="button">+</button>
+                  <input type="hidden" id="quantity" name="quantity" value="1">
+                </div>
+             
+            </div>
+              {% endif %}
+             
+             
+              <div class="product-button">
+                
+      
+           
+                <input type="submit" name="action" value="add to wishlist" class="add-wishlist-btn">
+                <input type="submit" name="action" value="add to bag" class="add-bag-btn">
+               
+          
+                  
+              </div>
+              <!--help-btn-->
+              <a href="#" class="help-btn">Need Any Help?</a>
+          </div>
+      </div>
+     
+    
+      
+            </form>  
+    </section>
+
+
+
+    <section>
+
+      <h2>product description</h2>
+      <p class="product_description">{{product_obj.product_description|linebreaksbr}}</p>
+    </section>
+ 
+
+    <section class="suggestions">
+
+    
+      <h1>Products You May Like !</h1>
+    
+    <div class="product-grid">
+    
+      {% for product in product %}
+      <div class="product-card">
+        <img src="/media/{{product.product_images.first.image}}"alt="Product Image">
+        <h2 class="product-name"><a href="{% url 'get_product' product.slug %}">{{product.product_name}}</a></h2>
+        <p class="original-price">{{product.original_price}}</p>
+        <p class="discounted-price">{{product.discounted_price}}</p>
+        <button class="buy-button">Buy Now</button>
+    </div>
+      {% endfor %}
+    </div>
+   
+    </section>
+  
+    <!--==Jquery===========================-->
+    <script
+  src="https://code.jquery.com/jquery-3.6.1.js"
+  integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+  crossorigin="anonymous"></script>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+        breakpoints: {
+          900: {
+            slidesPerView: 2,
+            spaceBetween: 0,
+          },
+          820: {
+            slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          1024: {
+            slidesPerView: 2,
+            spaceBetween:0,
+          },
+        },
+      });
+
+
+      $('.s-checkbox').on('change', function() {
+		    $('.s-checkbox').not(this).prop('checked', false);  
+		});
+
+    document.getElementById("submit-form-link").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default anchor tag behavior
+
+        // Find the selected radio input
+        const selectedRadio = document.querySelector('input[type="radio"]:checked');
+
+        if (selectedRadio) {
+            // Trigger the form submission
+            selectedRadio.form.submit();
+        } else {
+            alert("Please select a size before proceeding.");
+        }
+    });
+
+
+
+
+
+
+
+
+    
+    </script>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      const decreaseButton = document.getElementById("decrease");
+      const increaseButton = document.getElementById("increase");
+      const quantityInput = document.getElementById("quantity");
+      const quantityDisplay = document.getElementById("quantityDisplay");
+
+      // Initialize quantity from the hidden input field
+      let quantity = parseInt(quantityInput.value, 10);
+
+      // Decrease quantity
+      decreaseButton.addEventListener("click", () => {
+          if (quantity > 1) {
+              quantity--;
+              quantityInput.value = quantity.toString();
+              quantityDisplay.textContent = quantity;
+          }
+      });
+
+      // Increase quantity
+      increaseButton.addEventListener("click", () => {
+          quantity++;
+          quantityInput.value = quantity.toString();
+          quantityDisplay.textContent = quantity;
+      });
+  });
+</script>
+
+
+
+
+
+
+{% endblock%}

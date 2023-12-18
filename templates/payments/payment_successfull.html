@@ -1,0 +1,19 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/payment_success.css' %}">
+<section class="payment-section">
+    <div class="container-payment">
+        <img src="{% static 'icons/payment_success.png' %}" alt="">
+        <h1>Payment Successful</h1>
+        <p>Your order has been successfully placed.</p>
+        <p>Order ID: <strong>{{order_id}}</strong></p>
+        <p>Payment ID: <strong>{{payment_id}}</strong></p>
+
+        <a href="{% url 'home' %}" class="btn">Return to Home</a>
+    </div>
+
+</section>
+
+
+{% endblock %}

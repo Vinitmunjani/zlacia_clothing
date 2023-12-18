@@ -1,0 +1,84 @@
+.register{
+    padding-top: 100px ;
+}
+
+
+.container_form{ 
+ 
+   display:flex;
+   align-items:center;
+   justify-content:center;
+
+}
+.content{
+    background-color:transparent;
+    width:50%;
+    height:100vh;
+    color: black;
+   
+}
+
+.form-title{
+    padding:10px 40px 0px;
+    font-size: 50px;
+}
+form{
+    padding:0px 40px;
+}
+input[type=text], [type=email]{
+    border: none;
+    border-bottom: 1px solid black;
+    outline:none;
+    width:100%;
+    margin: 20px 0;
+    padding:10px 0;
+    background-color:transparent;
+   
+}
+input[type=password],input[type=number]{
+    border: none;
+    border-bottom: 1px solid black;
+    outline:none;
+    margin: 20px 0;
+    padding:5px 0;
+    background-color:transparent;
+    font-family: 'Julius sans one';
+ 
+    
+}
+input :hover {
+    background-color: red;
+}
+select{
+    border: none;
+    border-bottom: 1px solid black;
+    outline:none;
+    margin: 8px 0;
+    padding:5px 0;
+    width:50%;
+    background-color:transparent;
+}
+.beside{
+    display:flex;  
+    justify-content: space-between;
+}
+button{
+    color:#ffffff;
+    background-color: black;
+    height:40px;
+    width:25%;
+    margin-top:15px;
+    cursor: pointer;
+    border:none;
+    border-radius:2%;
+    outline:none;
+    text-align:center;
+    font-size:16px;
+    text-decoration:none;
+    -webkit-transition-duration:0.4s;
+    transition-duration:0.4s;
+    font-family: 'Julius sans one';
+}
+button:hover{
+    background-color:#454545;
+}

@@ -1,0 +1,57 @@
+{% extends 'base/base.html'%}
+
+{% load static %}
+{% block title %} casual Collections {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/casual_collection.css' %}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap" rel="stylesheet">
+
+
+
+{% endblock %}
+
+{% block content %}
+
+
+<section class="casual_section">
+  <div class="slogens">
+
+    <h2> casual Collection !</h2>
+    <h3>Half sleave T-shirts &bull; {{ product_count }} products</ul></h3>
+  </div>
+
+
+<div class="product-grid">
+
+  {% for product in products %}
+  <div class="product-card">
+    <a href="{% url 'get_product' product.slug %}"> <img src="/media/{{product.product_images.first.image}}"alt="Product Image"></a>
+   
+
+    
+    <h3 class="product-name"><a href="{% url 'get_product' product.slug %}">{{product.product_name}}</a></h3>
+    <p class="discounted-price">₹ {{product.discounted_price}}</p>
+    
+    
+ 
+</div>
+  {% endfor %}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</section>
+
+{% endblock %}

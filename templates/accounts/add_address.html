@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/add_address.css' %}">
+<div class="container_form">
+    <div class="content">
+      
+            <h1 class="form-title">your address</h1>
+            <form method="post" action="{% url 'save_address' %}">
+                {% csrf_token %}
+               <input type="text" placeholder="FULL NAME" name="full_name">
+               <input type="text" placeholder="ADDRESS 1" name="address1">
+               <input type="text" placeholder="ADDRESS 2" name="address2">
+        
+            <div class="beside">
+                <input type="number" name="pincode" id="pincode" placeholder="PINCODE">
+                <input type="text" name="city" id="city" placeholder="CITY">
+                <input type="text" name="state" id="state" placeholder="STATE"> 
+                
+            
+            </div>
+                
+                <input type="submit" value="continue">
+                <a href="{% url 'user_login' %}"> <p>Already have an account ?  </p></a>
+                
+            </form>
+        </div>
+ </div>
+
+ {% endblock %}

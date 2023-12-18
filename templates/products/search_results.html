@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/search_result.css' %}">
+<section class="search_result">
+    <h1>Search Results</h1>
+
+
+
+    {% if query %}
+        <p>Results for "{{ query }}":</p>
+    {% endif %}
+    
+    
+    <div class="product-grid">
+    
+        {% for product in results %}
+        <div class="product-card">
+          <a href="{% url 'get_product' product.slug %}"> <img src="/media/{{product.product_images.first.image}}"alt="Product Image"></a>
+         
+      
+          
+          <h3 class="product-name"><a href="{% url 'get_product' product.slug %}">{{product.product_name}}</a></h3>
+          <p class="discounted-price">₹ {{product.discounted_price}}</p>
+          
+          
+       
+      </div>
+        {% endfor %}
+      </div>
+      
+    
+    
+</section>
+
+
+{% endblock %}

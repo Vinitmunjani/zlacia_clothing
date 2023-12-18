@@ -1,0 +1,87 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist | ZLACIÀ{% endblock %}
+
+{% block content %} 
+<br>
+<link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+<section class="wishlist_products">
+
+  {%if wishlist_items %}
+<h1>My Wishlist</h1>
+  
+
+<table>
+  <thead>
+    <tr>
+      <th>PRODUCT</th>
+      <th>PRICE</th>
+      <th>STOCK STATUS</th>
+      <th>ACTIONS</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in wishlist_items %}
+    <form action="{% url 'add_item_of_wishlist_in_cart' item.uid %}" method="post">
+   
+  {% csrf_token %}
+    <tr>
+      <td> 
+        <div class="product">
+        <img src="/media/{{item.product.product_images.first.image}}" alt="">
+     <h5>{{item.product}}</h5></div></td>
+      <td>₹ {{item.product.discounted_price}}</td>
+      <td>In stock</td>
+      <td>
+        <div class="buttons">
+          <a href="{% url 'get_product' item.product.slug %}"><button  class="quick_view" type="button">
+            Quick View
+         </button></a>
+        <input type="submit" value="add to bag" class="add_to_cart">
+        <a href="{% url 'remove_wishlist_item' item.uid %}"><img src="{% static 'icons/delete.png' %}" alt="remove item"></a>
+        </div>
+
+      </td>
+    </tr>
+    
+</form>
+    {% endfor %}  
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+ 
+  </div>
+
+
+    
+    {% else %}
+    <div class="empty_wishlist">
+      <img src="{% static 'icons/empty_wishlist.png' %}" alt="">
+      <h1 class="empty_slogen">You don't have items in wishlist !</h1>
+  </div>
+    {% endif %}
+    
+</section>
+
+    
+  
+    
+
+
+
+
+
+
+
+
+
+{% endblock %}

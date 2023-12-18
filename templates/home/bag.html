@@ -1,0 +1,266 @@
+{% extends 'base/base.html' %}
+{% load static %}
+ 
+
+{% block title %}Bag{% endblock %}
+
+
+{% block content %} 
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+
+
+<link rel="stylesheet" href="{% static 'css/bag.css' %}">
+<script src="{% static 'js/bag.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<section class="bag_section2">
+    {% if bag_items %}
+    <div class="bag_heading">
+        <img src="{% static 'icons/empty_bag.png' %}" alt="bag">
+        <h1>My Bag</h1>
+    </div>
+    <div class="bag_body">
+        <div class="bag_items2">
+            <div class="cart-items">
+             
+                <table class="cart-table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Total</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in  bag_items %} 
+                    <tr>
+                       
+                      <td>
+                        <div class="product-container">
+                             <div class="product-image">
+                          <img src="/media/{{item.product.product_images.first.image}}" alt="{{item.product}}">
+                        </div>
+                        <div class="product-info">
+                          <h4>{{item.product}}</h4>
+                          <p>{{item.size}} </p>
+                          <p>color:white</p>
+                        </div>
+                        </div>
+                       
+                      </td>
+                      <td><h4>₹ {{item.product.discounted_price}}</h4></td>
+                      <td>
+                        <div class="counter_buttons">
+                            <form action="{% url 'update_quantity' item.uid %}" method="post">
+                                {% csrf_token %}
+                                <input type="submit" onclick="decrementQuantity('{{ item.uid }}')"  value="-" class="counter-button">
+                            <input type="number" id="quantity_{{ item.uid }}" value="{{ item.quantity }}" readonly name='quantity' class="counter-value">
+                            <input type="submit" onclick="incrementQuantity('{{ item.uid }}')" value="+" class="counter-button">
+                           
+                            </form>
+                        </div>
+                      </td>
+                      <td><h4>₹ {{ item.total_price }}</h4></td>
+                     <td>
+                   
+            <div class="buttons">
+              <a href="#" id="remove-item" data-item-id="{{ item.uid }}">
+                  <img src="{% static 'icons/delete.png' %}" alt="delete_icon" class="delete_icon">
+              </a>
+          </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            <div class="total_items">
+                <h5 class="item_count">{{item_count}} items</h5>
+                <h5 class="bag_total">₹ {{item_cost_sum}}</h5>
+
+            </div>
+        </div> 
+        <div class="bag_summery" id="myDiv">
+            
+                <h2>Bag Summery </h2>
+                <table>
+                    <tr>
+                      <th>Bag Total</th>
+                      <td>₹ {{bag_obj.get_bag_total}}</td>
+                    </tr>
+                  </table>
+                <table>
+                  <tr>
+                    <th>Shipping Cost</th>
+                    <td>₹ {{bag_obj.shipping_cost}}</td>
+                  </tr>
+                </table>
+  
+                <table>
+                  <tr>
+                    <th>Discount</th>
+                    <td>-₹ O</td>
+                  </tr>
+                </table>
+    
+                <table>
+                  <tr>
+                    <th>Tax</th>
+                    <td>(M.R.P. incl. of all taxes)</td>
+                  </tr>
+                </table>
+          
+           
+                <table>
+                  <tr>
+                    <th class="total">Estimated Total</th>
+                    <td class="total">₹ {{bag_obj.get_bag_total}}</td>
+                  </tr>
+                </table>
+                <div class="conditions">
+                    <p>*order above ₹500 gets the free shipping</p>
+                    <p>*shipping charges for orders less then ₹500 are calculated at the time of adding address</p>
+              
+                </div>
+                
+               
+          
+          <div class="btn">
+            <a href="{% url 'address' %}"><button class="checkout">Checkout</button></a>
+          </div>
+          
+              
+              
+            </div>
+          
+        </div>
+
+    </div>
+    {% else %}
+    <div class="empty_bag">
+        <img src="{% static 'icons/empty_bag.png' %}" alt="">
+        <h1 class="empty_slogen">Your Bag is empty!</h1>
+    </div>
+    
+{% endif %}
+
+
+
+
+
+
+
+</section>
+
+  
+<script>
+    window.addEventListener('scroll', function() {
+var scrollTop = window.scrollY;
+var stopPoint = document.getElementById('stopPoint').offsetTop;
+
+if (scrollTop >= stopPoint) {
+  document.getElementById('myDiv').style.top = stopPoint - 500 + 'px'; /* Adjust the 100px value to match the height of the div */
+} else {
+  document.getElementById('myDiv').style.top = 200 + 'px';
+}
+});
+  </script>
+<script>
+    // JavaScript to handle the quantity counter functionality
+    function incrementQuantity(itemId) {
+        var quantityInput = document.getElementById('quantity_' + itemId);
+        var currentQuantity = parseInt(quantityInput.value, 10);
+        quantityInput.value = currentQuantity + 1;
+    }
+
+    function decrementQuantity(itemId) {
+        var quantityInput = document.getElementById('quantity_' + itemId);
+        var currentQuantity = parseInt(quantityInput.value, 10);
+        if (currentQuantity > 1) {
+            quantityInput.value = currentQuantity - 1;
+        }
+    }
+
+   
+</script>
+
+
+
+
+    <!-- Other head elements -->
+  
+
+  
+   
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+function showConfirmationPopup(itemId) {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You are about to remove this item.',
+        
+        showCancelButton: true,
+        confirmButtonColor: '#000000',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'remove from bag  ',
+        customClass: {
+            popup: 'custom-animation',
+            confirmButton: 'custom-confirm-button',
+           
+
+        },
+        willClose: () => {
+            const popup = Swal.getPopup();
+            popup.classList.remove('custom-animation');
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            var xhr = new XMLHttpRequest();
+
+            // Construct the URL by appending itemId to the base URL
+            xhr.open('GET', '{% url "remove_bag_item" bag_item_id="itemId" %}'.replace("itemId", itemId), true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    
+                    // Redirect to another URL after successful removal
+                    window.location.href = "{% url 'bag' %}";  // Replace with your desired URL
+                } else {
+                    Swal.fire(
+                        'Error!',
+                        'There was an error removing the item.',
+                        'error'
+                    );
+                    console.log('Error removing item:', xhr.statusText);
+                }
+            };
+            xhr.send();
+        }
+    });
+}
+
+var removeButtons = document.querySelectorAll('#remove-item');
+removeButtons.forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        var itemId = button.getAttribute('data-item-id');
+        showConfirmationPopup(itemId);
+    });
+});
+});
+
+</script>
+<script>
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+</script>   
+
+
+{% endblock %}

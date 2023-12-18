@@ -1,0 +1,109 @@
+.search_result{
+    padding-top:100px 
+}
+
+.search_result h1,p{
+    margin: 20px;
+}
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Three items in one row */
+    gap: 0px;
+}
+@media(max-width:768px) {
+    .product-grid{
+        display: block;
+    }
+    .slogen h1{
+        font-size:20px;
+        text-align: left;
+
+        
+    }
+    .btn{
+        width:50%;
+    height:50px;
+    }
+    
+}
+
+.product-card {
+    flex: 0 1 calc(33.33% - 10px); /* 33.33% for 3 items in one row with reduced spacing */
+
+    color:#28221E;
+    background-image: linear-gradient(70deg,#fff, #f3f4f9);
+
+   /* Reduced padding */
+    text-align: center;
+
+    
+
+   
+}
+
+.product-card img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin: 100px auto;
+ 
+ 
+}
+
+.product-card img:hover {
+  scale: 1.2;
+  transition:ease-in-out 0.2s;
+  
+ 
+}
+
+
+  
+
+ 
+ 
+
+
+.product-name {
+    font-size: 0.875rem;
+    margin:  10px;
+    letter-spacing: .025rem;
+    justify-content: flex-start;
+}
+.product-name a:hover{
+    color:rgb(104, 104, 118) ;
+
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.discounted-price {
+    
+    color: black;
+    font-size: 0.875rem;
+    margin:  10px;
+    letter-spacing: .025rem;
+    justify-content: flex-start;
+    display: flex;
+}
+
+.buy-button {
+    background-color: transparent;
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'Julius sans one';
+    transition: background-color 0.2s;
+}
+
+.buy-button:hover {
+    background-color: black;
+    color: white;
+}
