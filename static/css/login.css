@@ -28,19 +28,22 @@ html, body{
    display:flex;
    align-items:center;
    justify-content:center;
+   align-items: center;
+   margin: auto;
 
 }
-.content{
+.login_content{
     background-color:transparent;
     width:50%;
     height:100vh;
+    padding-top:10vh ;
 }
 
 .form-title{
     padding:10px 40px 0px;
     font-size: 50px;
 }
-form{
+.login_form{
     padding:0px 40px;
 }
 .login-email {
@@ -76,7 +79,7 @@ select{
     display:flex;  
     justify-content: space-between;
 }
-button{
+.login-button{
     color:#ffffff;
     background-color: black;
     height:40px;
@@ -93,6 +96,10 @@ button{
     transition-duration:0.4s;
     font-family: 'Julius sans one';
 }
-button:hover{
+.login-button:hover{
     background-color:#454545;
+}
+
+.register_link p {
+    color:black;
 }

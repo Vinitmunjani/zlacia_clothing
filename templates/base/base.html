@@ -12,7 +12,7 @@
 
     <title>{% block title %}{% endblock %}</title>
     <!-- Add this in the head section of your HTML -->
-    <link rel="icon" href="/media/images/helper_images/logo_icon.png" type="image/x-icon" sizes="16X16">
+    <link rel="icon" href="/media/images/helper_images/monolog.png" type="image/x-icon" sizes="16X16">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.min.css">
 
 <!-- Add this at the end of the body section, before your own script tags -->
@@ -33,35 +33,57 @@
   <div class="container" id="container">
    
     <div class="container__left">
-      <div class="menu"> 
-      
-        <div class="menu_btn"><a href="#">menu</a></div></div>
+      <div class="menu-container">
+        <div class="menu-icon" id="menu-icon">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <div class="slider-menu" id="slider-menu">
+            <div class="close-icon" id="close-icon">
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+      <div id="search-container">
+        <button id="search-btn" onclick="showSearchForm()">Search</button>
+        <button id="search-btn-icon" onclick="showSearchForm()"><img src="{% static 'icons/search_white.png' %}" alt="search icon"></button>
+        <form id="search-form" action="{% url 'search' %}" method="get">
+            <input type="text" id="search-input" placeholder="what are you looking for ?" name="q">
+            <button type="submit" id="submit_btn"><img src="{% static 'icons/search.png'%}" alt=""></button>
+            <button type="button" onclick="cancelSearch()" id="cancel_btn"><img src="{% static 'icons/cancel.png'%}" alt="cancel"></button>
+        </form>
+    </div>
+      </div>
     
 
-        <div id="search-container">
-          <button id="search-btn" onclick="showSearchForm()">Search</button>
-          <form id="search-form" action="{% url 'search' %}" method="get">
-              <input type="text" id="search-input" placeholder="Enter your search" name="q">
-              <button type="submit" id="submit_btn"><img src="{% static 'icons/search.png'%}" alt=""></button>
-              <button type="button" onclick="cancelSearch()" id="cancel_btn"><img src="{% static 'icons/cancel.png'%}" alt="cancel"></button>
-          </form>
-      </div>
+        
 
         
-      </div>
+     
  
     <div class="container__center">
       <div class="logo"><a href="/"><h1>ZLACIÀ</h1></a></div>
     </div>
     <div class="container__right">
-      <div class="signin-signout"><a href="{% if user.is_authenticated %}{% url 'logout'%}{% else %}{% url 'user_login' %}  {% endif %}  " {% if user.is_authenticated %} id="sign-out-btn" {% endif %}>{% if user.is_authenticated %}{{user.username}}{% else %} sign in {% endif %}</a></div>
+      <div class="signin-signout"><a href="{% if user.is_authenticated %} # {% else %} {% url 'user_login' %} {% endif %}" {% if user.is_authenticated %} id="sign-out-btn" {% endif %}>{% if user.is_authenticated %}{{user.username}}{% else %} sign in {% endif %}</a></div>
       
       <div class="wishlist">      <a href="{% url 'wishlist' %}">
         wishlist
         {% if has_items_in_wishlist %} <span class="notification-dot"></span> {% endif %}
     </a></div>
     
-      <div class="bag"><a href="{% url 'bag' %}">bag</a></div>
+      <div class="bag"><a href="{% url 'bag' %}" class="bag-link">bag</a>
+        <a href="{% url 'bag' %}"><img src="{% static 'icons/bag_white.png' %}" alt="bag"></a>
+      
+      </div>
       <a href="#" id="profile-btn">profile</a>
 
     </div>
@@ -86,9 +108,10 @@
   {% endif %}</p>
     <button id="edit-details-btn">Edit Details</button>
 </div>
-  
+</div>
  
-    {% block content %}    {% endblock %}
+    {% block content %}  {% endblock %}
+
   </div> <div id="stopPoint"></div>
     <footer>
      
@@ -158,13 +181,15 @@
 
 </body>
 <!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <!-- Add the following script in your HTML or a separate JS file -->
 <script>
  function showSearchForm() {
         document.getElementById("search-btn").style.opacity = "0";
         document.getElementById("search-btn").style.transform = "translateY(-100%)";
+        document.getElementById("search-btn-icon").style.opacity = "0";
+        document.getElementById("search-btn-icon").style.transform = "translateY(-100%)";
         setTimeout(() => {
             document.getElementById("search-form").style.display = "flex";  // or "block"
             document.getElementById("search-form").style.opacity = "1";
@@ -181,6 +206,8 @@
         setTimeout(() => {
             document.getElementById("search-btn").style.opacity = "1";
             document.getElementById("search-btn").style.transform = "translateX(0%)";
+            document.getElementById("search-btn-icon").style.opacity = "1";
+            document.getElementById("search-btn-icon").style.transform = "translateX(0%)";
             document.getElementById("search-form").style.display = "none";
         }, 300); // Wait for the transition to complete
     }
@@ -206,6 +233,7 @@
               if (result.isConfirmed) {
                   // Perform the sign-out action here
                   var xhr = new XMLHttpRequest();
+                  xhr.open('GET', "{% url 'logout' %}", true);
 
             // Construct the URL by appending itemId to the base URL
             
@@ -241,5 +269,20 @@
     });
   </script>
     
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+    const sliderMenu = document.getElementById('slider-menu');
 
+    menuIcon.addEventListener('click', function () {
+        sliderMenu.style.left = '0';
+    });
+
+    closeIcon.addEventListener('click', function () {
+        sliderMenu.style.left = '-100%';
+    });
+});
+
+</script>
 </html> 

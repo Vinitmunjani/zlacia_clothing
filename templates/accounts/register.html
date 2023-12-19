@@ -7,10 +7,10 @@
 <section class="register">
 
     <div class="container_form">
-        <div class="content">
+        <div class="register_content">
           
                 <h1 class="form-title">Register Here</h1>
-                <form method="post" action="{% url 'register' %}">
+                <form method="post" action="{% url 'register' %}" class="register_form">
                     {% csrf_token %}
                    <input type="text" placeholder="NAME">
                 <div class="beside">
@@ -24,7 +24,7 @@
                 </div>
                     <input type="email" placeholder="EMAIL ADDRESS" name="email">
                     <input type="password" placeholder="password" name="password"><br>
-                    <input type="submit">
+                    <input type="submit" class='submit_btn'>
                     <a href="{% url 'user_login' %}"> <p>Already have an account ?  </p></a>
                     
                 </form>

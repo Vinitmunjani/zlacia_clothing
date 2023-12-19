@@ -10,10 +10,13 @@ from django.conf import settings
 # Create your views here.
 def home(request):
     categories = Category.objects.all().order_by('-created_at')
-    category_obj = Category.objects.get(slug='casual-collection')
-    products = Product.objects.all()
+    casual_obj = Category.objects.get(category_name='Casual Collection')
+    casual_products = Product.objects.filter(category=casual_obj)
+    hoodies_obj = Category.objects.get(category_name='hoodies')
+    hoodies=Product.objects.filter(category=hoodies_obj)
+    products = {'casual_products':casual_products,'hoodies':hoodies,'categories':categories}
 
-    return render(request, 'home/home.html',{'categories':categories ,'products':products})
+    return render(request, 'home/home.html' ,products)
 
 
 def wishlist(request):

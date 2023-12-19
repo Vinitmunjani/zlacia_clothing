@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pm+@v01kl0n5(c_@&jif5=j1kiry!6m*0+a0qh6tta(l1*fd@c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['zlacia.com','127.0.0.1','*']
 
 
 # Application definition
@@ -138,3 +138,10 @@ MEDIA_URL = '/media/'
 
 RAZOR_PAY_KEY = 'rzp_test_cfTwpv4L27w4RE'
 RAZOR_PAY_SECRET = 'IkeTq6t2TIxixiyaw8HO0agi'
+
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "vinitmunjani1513@gmail.com"
+EMAIL_HOST_PASSWORD = "dnxdcqkheppfnhyw"
+EMAIL_USE_TLS= True
+EMAIL_USE_SSL= False

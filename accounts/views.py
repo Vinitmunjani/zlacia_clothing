@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.contrib import messages
-
+from base.emails import send_account_activation_email
 # Create your views here.
 # views.py
 from django.shortcuts import render, redirect
@@ -11,6 +11,8 @@ from .models import UserAdd
 from django.contrib.auth.models import User
 from products.models import Bag
 import razorpay
+from django.conf import settings
+import uuid
 
 def register(request):
     if request.method == 'POST':
@@ -20,14 +22,33 @@ def register(request):
         gender = request.POST.get('gender')
         mobile = request.POST.get('mobile')
         username = email.split('@')[0]
+        email_token = str(uuid.uuid4())
         user = User.objects.create_user(username=username,email=email,password=raw_password)
-        user_profile_item = UserProfile.objects.create(user=user,mobile=mobile,gender=gender)
         user.save()
-        user_profile_item.save()
+        user_profile_item = UserProfile.objects.get_or_create(user=user,mobile=mobile,gender=gender,email_token=email_token)
+        
+        
+        if user_profile_item:
+            send_account_activation_email(email,email_token)
+
+
+  
         return redirect('user_login')  # Redirect to your home page
     else:
         
         return render(request, 'accounts/register.html')
+
+
+def activate_email(request,email_token):
+    try:
+        user = UserProfile.objects.get(email_token = email_token)
+        user.is_email_verified =True
+
+        user.save()
+
+    except Exception as e:
+        return HttpResponse('invalid email token ')
+    return redirect('/')
 
 def user_login(request):
     if request.method == 'POST':
@@ -60,7 +81,7 @@ def user_logout(request):
     return redirect('/')# Redirect to your home page
 def add_address(request):
     return render(request,'accounts/add_address.html')
-from django.conf import settings
+
 def user_address(request,uid=None):
     addresses = UserAdd.objects.all().filter(user = request.user)
     if addresses:

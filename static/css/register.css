@@ -10,7 +10,7 @@
    justify-content:center;
 
 }
-.content{
+.register_content{
     background-color:transparent;
     width:50%;
     height:100vh;
@@ -22,10 +22,10 @@
     padding:10px 40px 0px;
     font-size: 50px;
 }
-form{
+.register_form{
     padding:0px 40px;
 }
-input[type=text], [type=email]{
+.register_form input[type=text],.register_form [type=email]{
     border: none;
     border-bottom: 1px solid black;
     outline:none;
@@ -62,7 +62,7 @@ select{
     display:flex;  
     justify-content: space-between;
 }
-button{
+.submit_btn{
     color:#ffffff;
     background-color: black;
     height:40px;
@@ -79,6 +79,6 @@ button{
     transition-duration:0.4s;
     font-family: 'Julius sans one';
 }
-button:hover{
+.submit_btn:hover{
     background-color:#454545;
 }

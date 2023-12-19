@@ -184,3 +184,16 @@ def search_view(request):
         results = Product.objects.all()
 
     return render(request, 'products/search_results.html', {'results': results, 'query': query})
+
+
+
+def hoodies(request):
+    category_obj = Category.objects.get(category_name='hoodies')
+    print(category_obj)
+  
+    
+
+    products = Product.objects.filter(category=category_obj)
+    product_count = products.count()
+    context={'category_obj':category_obj,'products':products,'product_count':product_count}
+    return render(request,'product_categories/hoodies.html',context)
