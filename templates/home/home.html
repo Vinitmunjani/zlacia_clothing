@@ -24,9 +24,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<section class="landing" style="background-image:url('/media/images/helper_images/home.jpg'); height: 100vh; background-repeat: no-repeat; background-size: cover; filter: brightness(0.4);">
+<h1 class="landing_slogen">Crafted for Distinction</h1>
+</section>
 {% for category in categories %}
 
-<section class="{% if forloop.counter|divisibleby:2 %}background1{% else %}first-section{% endif %}" style= "background-image: url(media/{{category.background_image}});">
+<section class="{% if forloop.counter|divisibleby:2 %}background1{% else %}first-section{% endif %}" style= "background-image: url(media/{{category.background_image}}); ">
    
     <div class="overlay"></div>
 
@@ -50,7 +53,7 @@
 </section>
 {% if forloop.counter == 1 %}
 <section class="suggestions">
-    <h1>Products you may like!</h1>
+
   
     <!-- Custom section after the second category -->
   
@@ -62,10 +65,9 @@
         </a>
        
         <h2 class="product-name"><a href="{% url 'get_product' product.slug %}">{{ product.product_name }}</a></h2>
-        <div class="buy_btn">
-          <a href="{% url 'get_product' product.slug %}"><button>buy now</button></a>
-          </div>
-        <!-- <p class="discounted-price">₹ {{ product.discounted_price }}</p>-->
+
+        <h2 class="discounted-price">₹ {{ product.discounted_price }}</h2>
+
       </div>
       {% endfor %}
     </div>
@@ -75,7 +77,7 @@
   {% endif %}
   {% if forloop.counter|divisibleby:2 %}
 <section class="suggestions">
-    <h1>Products you may like!</h1>
+
   
     <!-- Custom section after the second category -->
   
@@ -87,9 +89,8 @@
         </a>
        
         <h2 class="product-name"><a href="{% url 'get_product' product.slug %}">{{ product.product_name }}</a></h2>
-        <div class="buy_btn">
-          <a href="{% url 'get_product' product.slug %}"><button>buy now</button></a>
-          </div>
+        <h2 class="discounted-price">₹ {{ product.discounted_price }}</h2>
+     
         <!-- <p class="discounted-price">₹ {{ product.discounted_price }}</p>-->
       </div>
       {% endfor %}

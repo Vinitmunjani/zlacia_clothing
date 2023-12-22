@@ -16,14 +16,14 @@ body {
   padding: 0;
   font-family: 'Julius sans one';
   overflow-x: hidden; 
-  background-color: #f3f4f9;
+  background-color:white;
 }
 
 .logo{
 
 font-size:15px;
 font-weight:bold;
-margin:10px auto;
+
 justify-content: center;
 align-items:center;
 display: flex;
@@ -63,13 +63,11 @@ li {
 
   z-index:9999;
   position: fixed;
-  
-  background: rgba(00, 00,00, 0.9); /* Adjust the alpha channel for transparency */
-  backdrop-filter: blur(20px);
-  
+
   width: 100%;
 
   transition: top 0.3s;
+
   
 
 }

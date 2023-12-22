@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-pm+@v01kl0n5(c_@&jif5=j1kiry!6m*0+a0qh6tta(l1*fd@c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['zlacia.com','127.0.0.1','*']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -125,8 +125,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -145,3 +143,6 @@ EMAIL_HOST_USER = "vinitmunjani1513@gmail.com"
 EMAIL_HOST_PASSWORD = "dnxdcqkheppfnhyw"
 EMAIL_USE_TLS= True
 EMAIL_USE_SSL= False
+
+
+WKHTMLTOPDF_PATH = 'C:/Users/vinit munjani/Downloads/wkhtmltox-0.12.6-1.msvc2015-win64.exe'

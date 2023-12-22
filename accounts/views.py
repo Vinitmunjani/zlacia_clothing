@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse
 from django.contrib import messages
-from base.emails import send_account_activation_email
+from base.emails import send_account_activation_email,send_invoice
 # Create your views here.
 # views.py
 from django.shortcuts import render, redirect
@@ -9,11 +9,12 @@ from .forms import UserRegistrationForm, UserLoginForm
 from .models import UserProfile,UserAdd
 from .models import UserAdd
 from django.contrib.auth.models import User
-from products.models import Bag
+from products.models import BagItems,Bag
 import razorpay
 from django.conf import settings
 import uuid
-
+import datetime
+from base.helpers import save_pdf
 def register(request):
     if request.method == 'POST':
     
@@ -148,11 +149,25 @@ def payment_success(request):
     bag.razor_pay_payment_id = request.GET.get('razorpay_payment_id')
     bag.razor_pay_payment_signature = request.GET.get('razorpay_signature')
     bag.save()
+    ordered_items = BagItems.objects.filter(bag=bag)
+    addresses = UserAdd.objects.all().filter(user = request.user)
+
+    
+
+
     context = {
         'order_id':request.GET.get('razorpay_order_id'),
         'payment_id':request.GET.get('razorpay_payment_id'),
+        'ordered_items':ordered_items,
+        'bag_total':bag.get_bag_total,
+        'time':datetime.datetime.now(),
+        'address':addresses[0]
+        
       
     }
+    invoice = save_pdf(context)
+    send_invoice(request.user.email,invoice)
     return render(request,'payments/payment_successfull.html',context)
+    
 
     

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice</title>
+    <style>
+
+
+        #invoice {
+            width: 800px;
+            min-height: 100vh;
+            margin: 20px auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+  
+            border: none;
+             /* Adjust the background color and opacity */
+        }
+
+        #invoice header {
+            text-align: center;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        #invoice header img {
+            max-width: 100%;
+            height: auto;
+            border: none;
+        }
+
+        #invoice .company-details {
+            text-align: right;
+        }
+
+        #invoice .customer-details {
+            margin-top: 20px;
+        }
+
+        #invoice table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        #invoice table, #invoice th, #invoice td {
+            border: 1px solid #ddd;
+        }
+
+        #invoice th, #invoice td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        #invoice .total {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        #invoice .notes {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body style="font-family: 'Arial', sans-serif; margin: 0; padding: 0; background: url('http://127.0.0.1:8000//media/images/helper_images/monolog.png') no-repeat fixed center; background-size:contain; border:none">
+
+
+
+    <div id="invoice">
+        <header>
+            <h1 style="font-family: 'Julius sans one';">Z L A C I À</h1>
+            <h1>Invoice</h1>
+        </header>
+
+        <div class="order-details">
+            <p><strong>Order ID:</strong> {{order_id}}</p>
+            <p><strong>Payment ID:</strong>{{payment_id}}</p>
+        
+            <p><strong>Invoice Generated:</strong>{{time}}</p>
+        </div>
+        <div class="company-details">
+            <p>ZLACIÀ</p>
+            <p>6,Jokha Road,kamrej</p>
+            <p>Surat, India, 394326</p>
+            <p>Email: support@zlacia.com</p>
+        </div>
+
+        <div class="customer-details">
+            <p><strong>Name:</strong>{{address.full_name}}</p>
+            <p>{{address.addressline1 }},{{address.addressline2}}</p>
+            <p>{{ address.city }},{{ address.state }},{{ address.pincode }}</p>
+            <p>{{ user.email }}</p>
+        </div>
+ 
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Description</th>
+                    <th>Quantity</th>
+                    <th>Unit Price</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            {% for product in ordered_items %}
+            <tbody>
+                <tr>
+                    <td>{{product.product}}</td>
+                    <td>{{product.size}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.product.discounted_price}}</td>
+                    <td>{{product.total_price}}</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+            {% endfor %}
+        </table>
+
+        <div class="total">
+            <p><strong>Total:</strong>{{bag_total}}</p>
+        </div>
+
+        <div class="notes">
+            <h3>Shipping Information:</h3>
+            <p>
+                Thank you for shopping with ZLACIÀ ! We are committed to delivering your order accurately, in good condition, and on time.</p>
+                <p>   Shipping Timeframe:</p>
+             
+                
+               <p>All orders are processed within 2 business days.
+                Shipping times may vary based on your location and product availability.
+                Standard shipping within India typically takes 7 to 15 business days.</p> 
+             
+                <p>Order Tracking:</p>
+                
+                <p>Once your order has been shipped, you will receive a confirmation email with a tracking number.
+                    You can track your order by visiting our website and entering your tracking number in the designated tracking section.
+                    International Shipping:
+                    
+                    For international orders, shipping times and charges may vary. Customs and import duties may apply and are the responsibility of the customer.</p>
+                    <p>  Shipping Delays:</p>
+              
+                <p>    In the rare event of unforeseen shipping delays, we will notify you promptly via email or phone.</p>
+            
+
+            <h3>Return Conditions:</h3>
+            <p>We want you to be completely satisfied with your purchase. If you're not satisfied for any reason, you may return your items within 7 days of receiving your order.</p>
+            <p>Return Eligibility:</p>
+            <p>Items must be in their original condition, with all tags attached.
+                Returns must be initiated within 7 days of receiving your order.</p>
+                <p> How to Initiate a Return:</p>
+                <p>
+                    Contact our customer service team at support@zlacia.com to request a return authorization.
+                    Pack the items securely in the original packaging.
+                    Include a copy of the packing slip or order confirmation.
+                    Ship the package to the address provided by our customer service team.</p>
+               
+
+
+
+        </div>
+     
+    </div>
+
+
+</body>
+
+</html>
