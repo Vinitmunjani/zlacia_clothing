@@ -143,19 +143,26 @@
 
     
       <h1>Products You May Like !</h1>
-    
-    <div class="product-grid">
-    
-      {% for product in product %}
-      <div class="product-card">
-        <img src="/media/{{product.product_images.first.image}}"alt="Product Image">
-        <h2 class="product-name"><a href="{% url 'get_product' product.slug %}">{{product.product_name}}</a></h2>
-        <p class="original-price">{{product.original_price}}</p>
-        <p class="discounted-price">{{product.discounted_price}}</p>
-        <button class="buy-button">Buy Now</button>
-    </div>
-      {% endfor %}
-    </div>
+
+      <div class="product-grid">
+
+        {% for product in product %}
+        <div class="product-card">
+          <a href="{% url 'get_product' product.slug %}"> <img src="/media/{{product.product_images.first.image}}"alt="Product Image"></a>
+         
+      
+          
+          <h3 class="product-name"><a href="{% url 'get_product' product.slug %}">{{product.product_name}}</a></h3>
+          <p class="discounted-price">₹ {{product.discounted_price}}</p>
+          
+          
+       
+      </div>
+        {% endfor %}
+      </div>
+      
+      
+      
    
     </section>
   

@@ -35,9 +35,9 @@
     <div class="container__left">
       <div class="menu-container">
         <div class="menu-icon" id="menu-icon">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+            <div class="bar" id="bar1"></div>
+            <div class="bar" id="bar2"></div>
+            <div class="bar" id="bar3"></div>
         </div>
         <div class="slider-menu" id="slider-menu">
             <div class="close-icon" id="close-icon">
@@ -70,17 +70,17 @@
      
  
     <div class="container__center">
-      <div class="logo"><a href="/"><h1>ZLACIÀ</h1></a></div>
+      <div class="logo"><a href="/"><h1 id="logo_text">ZLACIÀ</h1></a></div>
     </div>
     <div class="container__right">
-      <div class="signin-signout"><a href="{% if user.is_authenticated %} # {% else %} {% url 'user_login' %} {% endif %}" {% if user.is_authenticated %} id="sign-out-btn" {% endif %}>{% if user.is_authenticated %}{{user.username}}{% else %} sign in {% endif %}</a></div>
+      <div class="signin-signout"><a href="{% if user.is_authenticated %} # {% else %} {% url 'user_login' %} {% endif %}" {% if user.is_authenticated %} id="sign-out-btn" {% else %} id="sign_in" {% endif %}>{% if user.is_authenticated %}{{user.username}}{% else %} sign in {% endif %}</a></div>
       
-      <div class="wishlist">      <a href="{% url 'wishlist' %}">
+      <div class="wishlist">      <a href="{% url 'wishlist' %}" id='wishlist'>
         wishlist
         {% if has_items_in_wishlist %} <span class="notification-dot"></span> {% endif %}
     </a></div>
     
-      <div class="bag"><a href="{% url 'bag' %}" class="bag-link">bag</a>
+      <div class="bag"><a href="{% url 'bag' %}" class="bag-link" id="bag">bag</a>
         <a href="{% url 'bag' %}"><img src="{% static 'icons/bag_white.png' %}" alt="bag"></a>
       
       </div>
@@ -112,7 +112,7 @@
  
     {% block content %}  {% endblock %}
 
-  </div> <div id="stopPoint"></div>
+  </div> 
     <footer>
      
      <div class="content" >
@@ -277,9 +277,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuIcon = document.getElementById('menu-icon');
     const closeIcon = document.getElementById('close-icon');
     const sliderMenu = document.getElementById('slider-menu');
+    
 
     menuIcon.addEventListener('click', function () {
         sliderMenu.style.left = '0';
+
     });
 
     closeIcon.addEventListener('click', function () {

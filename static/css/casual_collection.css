@@ -59,6 +59,7 @@ section h2{
     margin:  10px;
     letter-spacing: .025rem;
     justify-content: flex-start;
+    text-align: left;
 }
 
 
@@ -66,10 +67,11 @@ section h2{
     flex: 0 1 calc(33.33% - 10px); /* 33.33% for 3 items in one row with reduced spacing */
 
     color:#28221E;
-    background-image: linear-gradient(70deg,#fff, #f3f4f9);
+    background-color: #f3f4f9;
 
    /* Reduced padding */
     text-align: center;
+    margin: 1px;
 
     
 
@@ -79,17 +81,11 @@ section h2{
 .product-card img {
     max-width: 100%;
     border-radius: 5px;
-    margin: 100px auto;
+    margin: auto;
  
  
 }
 
-.product-card img:hover {
-  scale: 1.2;
-  transition:ease-in-out 0.2s;
-  
- 
-}
 
 
   
@@ -140,7 +136,7 @@ section h2{
 
 section h3 a{
     display: flex;
-    justify-content: center;
+
     font-size: 12px;
     text-decoration: none;
     color:black;

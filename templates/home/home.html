@@ -24,9 +24,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<section class="landing" style="background-image:url('/media/images/helper_images/home.jpg'); height: 100vh; background-repeat: no-repeat; background-size: cover; filter: brightness(0.4);">
-<h1 class="landing_slogen">Crafted for Distinction</h1>
-</section>
+
 {% for category in categories %}
 
 <section class="{% if forloop.counter|divisibleby:2 %}background1{% else %}first-section{% endif %}" style= "background-image: url(media/{{category.background_image}}); ">
@@ -51,7 +49,9 @@
 
 
 </section>
+
 {% if forloop.counter == 1 %}
+
 <section class="suggestions">
 
   
@@ -105,7 +105,29 @@
   
 {% endfor %}
 
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var containers = document.querySelectorAll('.background1');
 
+    function revealOnScroll() {
+      containers.forEach(function(container) {
+        var scrollPosition = window.scrollY;
+        var containerPosition = container.offsetTop;
+        var windowHeight = window.innerHeight;
+
+        if (scrollPosition + windowHeight > containerPosition) {
+          container.classList.add('reveal');
+        }
+      });
+    }
+
+    // Attach the revealOnScroll function to the scroll event
+    window.addEventListener('scroll', revealOnScroll);
+
+    // Trigger the revealOnScroll function on page load
+    revealOnScroll();
+  });
+</script>
 
 
 <script>

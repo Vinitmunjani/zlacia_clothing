@@ -24,7 +24,7 @@ def send_account_activation_email(email,email_token):
 def send_invoice(email,invoice_pdf):
     subject = 'Thank you for your order!'
     email_from = settings.EMAIL_HOST_USER
-    msg = f"Please find attached the invoice of your recent purchase."
+    msg = f"Please find attached invoice of your recent purchase."
 
     email = EmailMessage(
         subject=subject,

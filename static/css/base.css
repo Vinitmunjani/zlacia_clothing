@@ -65,14 +65,14 @@ li {
   position: fixed;
 
   width: 100%;
-
-  transition: top 0.3s;
+  transition:0.5s;
 
   
 
 }
+
 .container a{
-  color:#f3f4f9;
+  color:white;
 }
 
 .container__left {

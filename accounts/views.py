@@ -5,7 +5,7 @@ from base.emails import send_account_activation_email,send_invoice
 # views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate,logout
-from .forms import UserRegistrationForm, UserLoginForm
+
 from .models import UserProfile,UserAdd
 from .models import UserAdd
 from django.contrib.auth.models import User
@@ -24,7 +24,8 @@ def register(request):
         mobile = request.POST.get('mobile')
         username = email.split('@')[0]
         email_token = str(uuid.uuid4())
-        user = User.objects.create_user(username=username,email=email,password=raw_password)
+        user = User.objects.create_user(username=username,email=email)
+        user.set_password(raw_password=raw_password)
         user.save()
         user_profile_item = UserProfile.objects.get_or_create(user=user,mobile=mobile,gender=gender,email_token=email_token)
         
@@ -58,24 +59,17 @@ def user_login(request):
         try:
             user = User.objects.get(email=email)
             print(user)
-        except:
-            messages.error(request, 'Username does not exist!')
-            print(messages)
-        user = authenticate(request,username=user, password=password)
-        print(user)
-        if user:
-            print('logged in')
-        else:
-            print('cant authenticate')
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            return render(request, 'accounts/login.html')
+            user = authenticate(request,username=user.username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('/')
+
+        except Exception as e:
+            print(e)
+          
             # Redirect to your home page
-    else:
        
-        return render(request, 'accounts/login.html')
+    return render(request, 'accounts/login.html')
     
 def user_logout(request):
     logout(request)
