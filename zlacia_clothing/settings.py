@@ -13,15 +13,24 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+import environ
+
+
 
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 DATABASES = {
-    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'text',
+        'USER': 'vinit',
+        'PASSWORD': 'vinit12',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
 }
 
 # Quick-start development settings - unsuitable for production
