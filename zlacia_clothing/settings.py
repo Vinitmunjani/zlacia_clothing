@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-pm+@v01kl0n5(c_@&jif5=j1kiry!6m*0+a0qh6tta(l1*fd@c
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['zlacia.com','www.zlacia.com','27.57.187.146']
 
 
 # Application definition
@@ -153,3 +153,5 @@ EMAIL_USE_SSL= False
 
 
 WKHTMLTOPDF_PATH = 'C:/Users/vinit munjani/Downloads/wkhtmltox-0.12.6-1.msvc2015-win64.exe'
+
+import os 
