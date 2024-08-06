@@ -28,7 +28,7 @@ DATABASES = {
         'NAME': 'test',
         'USER': 'vinit',
         'PASSWORD': 'vinit12',
-        'HOST': 'zlacia',
+        'HOST': '27.61.160.226',
         'PORT': '5432',
         
     }
