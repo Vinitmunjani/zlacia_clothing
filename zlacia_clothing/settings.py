@@ -156,4 +156,4 @@ WKHTMLTOPDF_PATH = 'C:/Users/vinit munjani/Downloads/wkhtmltox-0.12.6-1.msvc2015
 
 import os 
 
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build','static')
+STATIC_ROOT = os.path.join(BASE_DIR,'/staticfiles_build','static')
