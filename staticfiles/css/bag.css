@@ -1,0 +1,357 @@
+
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.cart-container {
+    width: 40%;
+    height: 100vh;
+    margin: 20px ;
+
+    padding: 20px;
+
+   
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    border: 1px solid black;
+    min-height: 20vh;
+    background-color: #f3f4f9;
+}
+
+.product img {
+    max-width: 100px;
+    margin-right: 20px;
+}
+
+.product-details {
+    flex-grow: 1;
+}
+
+.quantity input {
+    width: 40px;
+    padding: 5px;
+    text-align: center;
+}
+
+.remove-btn {
+    background-color: #ff4d4d;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.summary {
+    position: fixed; /* Use a fixed position */
+    bottom: 0; /* Position at the bottom of the viewport */
+    left: 0; /* Align to the left */
+    width: 100%; /* Take up the full width of the viewport */
+    background-color: #f3f4f9; /* Add a background color for visibility */
+    /* Add some padding for styling */
+    box-sizing: border-box; 
+    /* Include padding in the width calculation */
+    justify-content: flex-end;
+    display: flex;
+    height:100px ;
+    border: 1px solid black;
+}
+
+
+
+.checkout-btn {
+   
+    background-color: black;
+    color: white;
+    border: none;
+    font-family: 'Julius sans one';
+    cursor: pointer;
+    justify-self: flex-end;
+    height: 100%;
+    width:200px;
+}
+
+.checkout-btn:hover {
+    background-color: #454545;
+}
+
+
+
+/* Add this CSS to your existing stylesheet or in a new style block */
+
+/* Add this to your CSS file or style section */
+@keyframes customAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.custom-animation {
+    animation: customAnimation 0.5s ease;
+}
+
+.custom-confirm-button{
+    font-family:'Julius sans one';
+    border-radius: 10px;
+
+}
+.bag_section{
+    min-height: 100vh;
+    padding-top: 100px;
+
+}
+
+
+
+
+
+.counter-button {
+    background-color: transparent;
+    border:1px solid black;
+    color:black;
+    
+    font-size: 20px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+}
+
+.counter-value {
+    margin: 0 20px;
+    font-size: 12px;
+    width: 24px;
+    background-color: transparent;
+    border: none;
+    
+}
+
+.counter_buttons{
+    margin-top:10px;
+}
+
+.empty_bag{
+    justify-content: center;
+    margin:auto;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: revert-layer;
+    flex-direction: column;
+    margin-top: 200px;
+}
+
+.empty_bag img{
+    width: 64px;
+    height: 64px;
+}
+
+
+.bag_section2{
+    min-height: 100vh;
+    background-color:#f3f4f9;
+    width: 100%;
+    padding-top:50px;
+ 
+}
+.bag_heading{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin:auto;
+    padding-top: 50px;
+   
+
+}
+.bag_heading img{
+    width: 50px;
+    height: auto;
+    margin:10px;
+}
+
+.bag_body{
+    width: 90%;
+    height: 90%;
+    margin:auto;
+    margin-top: 5vh;
+  
+}
+
+.bag_items2{
+    width: 60%;
+    min-height: 80vh;
+ 
+    position: relative;
+    
+}
+
+.bag_summery{
+    position: absolute;
+    right:10%;
+    top:30%;
+    border:1px solid #ccc;
+    width: 30%;
+    height: 50vh;
+  
+    background-color: #f3f4f9;
+    transition: top 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+  
+ 
+}
+
+.total_items{
+    width: 100%;
+    height: 100px;
+    border-top: 2px solid #ccc;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+
+  h2 {
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+  }
+
+
+  td {
+    
+    padding: 5px;
+    text-align:right;
+    background-color: transparent;
+    font-size: 13px;
+ 
+
+  }
+
+th {
+
+    text-align: left;
+    font-size: 13px;
+    font-weight:lighter;
+    padding-left: 10px;
+  }
+
+.total {
+    font-size: 20px;
+    font-weight: bold;
+    border-top: 1px solid gray;
+  
+ 
+  }
+
+.btn{
+   
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  
+
+}
+.checkout{
+ 
+    border:1px solid black;
+    background-color:black;
+    color:black;
+    width: 100%;
+    height: 60px;
+    font-family: 'Julius sans one';
+    font-weight: bold;
+    color: #f3f4f9;
+    cursor: pointer;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+}
+.conditions{
+    position: absolute;
+    bottom: 60px;
+    margin: 8px;
+}
+.conditions p{
+    font-size: 12px;
+}
+.cart-items {
+    flex-basis: 50%;
+  }
+  
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .cart-table th{
+    padding: 8px;
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+  }
+  .cart-table td{
+    padding: 20px;
+    border-top:2px solid #ccc;
+    text-align: center;
+    border-bottom:2px solid #ccc ;
+  }
+  .cart-table .product-image {
+    width: 150px;
+    height:auto ;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  
+  .cart-table .product-image img {
+    width: 100%;
+    height: 100%;
+    
+  }
+  
+  .cart-table .product-info {
+    display: inline-block;
+    margin-left: 10px;
+    text-align: left;
+  }
+ 
+  .product-container{
+    display: flex;
+  }
+
+  .item_count{
+    margin-left:50px;
+  }
+  .bag_total{
+    margin-right: 40px;
+  }
+
+  
+.buttons a img {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}

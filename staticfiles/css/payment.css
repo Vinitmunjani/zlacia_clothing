@@ -1,0 +1,38 @@
+.summary {
+    position: fixed; /* Use a fixed position */
+    bottom: 0; /* Position at the bottom of the viewport */
+    left: 0; /* Align to the left */
+    width: 100%; /* Take up the full width of the viewport */
+    background-color: #f3f4f9; /* Add a background color for visibility */
+    /* Add some padding for styling */
+    box-sizing: border-box; 
+    /* Include padding in the width calculation */
+    justify-content: flex-end;
+    display: flex;
+    height:100px ;
+    border: 1px solid black;
+}
+
+.total {
+  
+    font-weight:bold;
+    font-size: 15px;
+     /* Remove default margin for the total */
+}
+
+.checkout-btn {
+   
+    background-color: black;
+    color: white;
+    border: none;
+    font-family: 'Julius sans one';
+    cursor: pointer;
+    justify-self: flex-end;
+    height: 100%;
+    width:200px;
+}
+
+.checkout-btn:hover {
+    background-color: #454545;
+}
+

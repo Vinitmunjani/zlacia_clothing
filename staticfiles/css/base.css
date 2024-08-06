@@ -1,0 +1,475 @@
+html{
+  scroll-behavior: smooth;
+}
+@font-face {
+  font-family: 'Julius sans one';
+  src: url('/static/fonts/JuliusSansOne-Regular.ttf') format('truetype');
+  /* Add other font formats if necessary */
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Julius sans one';
+  overflow-x: hidden; 
+  background-color:white;
+}
+
+.logo{
+
+font-size:15px;
+font-weight:bold;
+
+justify-content: center;
+align-items:center;
+display: flex;
+letter-spacing: 10px;
+color:#f3f4f9
+}
+
+
+.bar {
+  width: 20px;
+  height: 1px;
+  background-color:#f3f4f9;
+  margin: 3px 0;
+} 
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+li {
+  margin-right: 20px;
+}
+
+.container a {
+  text-decoration: none;
+  color: black;
+
+}
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr repeat(1, auto) 1fr;
+
+  z-index:9999;
+  position: fixed;
+
+  width: 100%;
+  transition:0.5s;
+
+  
+
+}
+
+.container a{
+  color:white;
+}
+
+.container__left {
+
+  display: flex;
+  justify-content:flex-start;
+  align-items: center;
+  padding: 30px;
+
+
+
+
+}
+
+.container__center {
+  grid-column-start: 2;
+  justify-content: center;
+  display: flex;
+  margin:auto;
+  align-items: center;
+}
+.container__right {
+  display: flex;
+  justify-content:flex-end;
+  padding: 30px;
+
+  align-items: center;
+
+
+}
+
+.wishlist,.call_us,.bag,.signin-signout,#profile-btn{
+  margin:10px;
+  font-size: 15px;
+}
+
+.bag a img{
+  display: none;
+}
+
+.search{
+  display:flex;
+ 
+
+
+  
+ 
+}
+.search_btn{
+  margin:10px;
+  font-size:12px ;
+}
+
+#search-btn-icon{
+  display: none;
+}
+
+
+
+
+
+
+
+
+#profile-btn:hover {
+  color: #ffc107; /* change to your preferred highlight color */
+}
+#profile-menu {
+  display: none;
+  position: fixed;
+  top: 100px;
+  right: -100%; /* Initial position off-screen to the right */
+  background-color: #333;
+  color: white;
+  width: 30%;
+  height: 100vh;
+  max-width: 300px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  border-radius: 10px;
+  transition: top 10s ease-in-out; /* Corrected: Transition on right property */
+}
+
+#profile-menu p {
+  margin: 0 0 15px;
+  font-size: 16px;
+}
+
+#edit-details-btn {
+  background-color: #ffc107; /* change to your preferred highlight color */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#edit-details-btn:hover {
+  background-color: #e0a800; /* change to your preferred hover color */
+}
+
+footer{
+  background-color: #000000;
+  height: 100vh;
+  max-width: 100%;
+}
+
+.content{
+
+  width: 100%;
+  height: 70vh;
+
+  justify-content: center;
+  margin: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.content .link-box{
+  width: 25%;
+  height: 50%;
+  border:1px solid black;
+  margin: 10px;
+  margin-top: 100px;
+}
+.content .link-box h1{
+  color: white;
+  font-size: 30px;
+}
+.content .link-box .links p{
+  text-align: left;
+  color: #f3f4f9;
+
+}
+.content .link-box .sub-email{
+  width:80%;
+  height: 45px;
+  border: none;
+  font-family: 'Julius sans one';
+  background-color: #f3f4f9;
+}
+
+.sub-email-submit{
+  border:1px solid white;
+  background-color: transparent;
+  width: 70%;
+  height: 45px;
+  color:#f3f4f9;
+  font-family: 'Julius sans one';
+  margin-top:10px
+}
+
+.footer-logo .logo-text h1{
+  font-family:'Julius sans one' ;
+  color:#f3f4f9;
+  text-align: center;
+  justify-content: center;
+  font-size:60px;
+  letter-spacing: 10px;
+}
+.socials{
+  justify-content: center;
+  display: flex;
+  margin: auto;
+}
+.socials .social_media img{
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+#stopPoint {
+  height: 560px;
+  width: 90%;
+ 
+}
+
+
+/* styles.css or in your existing CSS file */
+#search-container {
+  position: relative;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#search-btn,
+#search-form {
+  transition: all 0.3s ease;
+}
+
+#search-btn{
+  cursor: pointer;
+  background-color: transparent;
+  color: #f3f4f9;
+  border: none;
+  font-family: 'Julius sans one';
+  font-size: 15px;
+  margin: 10px;
+
+}
+
+#search-form {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(-100%);
+  width: 300px;
+  background-color: white;
+  height: 45px;
+  border: none;
+}
+
+#search-input {
+  width: 300px; 
+  border: none;
+  border-bottom:1px solid#CCC;
+  background-color: transparent;
+ /* Adjust the width as needed */
+}
+#search-input:focus-visible{
+  outline:none;
+}
+#search-input::placeholder{
+  font-family: 'Julius sans one';
+}
+#cancel_btn,#submit_btn{
+  background-color: transparent;
+  border: none;
+
+}
+#cancel_btn img,#submit_btn img{
+  width: 20px;
+  height: 20px;
+}
+/* website css for mobile  */
+
+
+.menu-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  
+  color: #f3f4f9;
+}
+.menu-container .menu-icon .bar{
+  margin-top: 1px;
+  height: 1px;
+  width: 15px;
+}
+.menu-icon,
+.close-icon {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.bar {
+  width: 30px;
+  height: 3px;
+  background-color: #fff;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.slider-menu {
+  position: fixed;
+  top: 0px;
+  left: -100%;
+  width: 30%;
+  height: 120vh;
+  background: rgba(00, 00,00, 1); /* Adjust the alpha channel for transparency */
+  backdrop-filter: blur(20px);
+  color: #fff;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
+  z-index: 99999;
+}
+
+.slider-menu ul {
+  list-style: none;
+  padding: 0;
+  /* margin: 0; */
+  display: flex;
+  justify-content: center;
+  margin: 100px auto;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  
+}
+
+.slider-menu li {
+  margin: 15px 0;
+  display: block
+}
+
+.slider-menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+}
+/* media query for mobile view */
+@media (max-width: 768px) {
+  .container{
+    width: 100%;
+    
+  }
+  #search-btn{
+    display: none;
+  }
+  #search-btn-icon{
+    display: block;
+    display: block;
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    transition: all 0.3s ease;
+  }
+  .bag .bag-link,.wishlist,.signin-signout,#profile-btn {
+    display: none;
+  }
+  .bag a img{
+    display:block;
+    height: 28px;
+    width: auto;
+    
+  }
+  .logo{
+    font-size: 12px;
+
+  }
+  .slider-menu {
+    width:80%;
+    position:fixed ;
+    top:0px;
+    left:-100%;
+}
+
+.content{
+  justify-content: center;
+  display:block;
+  height: auto;
+  width: 100%;
+}
+.content .link-box{
+  width: 100%;
+ 
+
+  margin-top: 10px;
+
+  margin-right: 0px;
+  margin-bottom: 0px;
+ 
+
+  display: flex;
+  flex-direction: column;
+
+
+}
+.content .link-box h1{
+  color: white;
+  font-size: 15px;
+}
+.content .link-box .links p{
+  text-align: left;
+  color: #f3f4f9;
+  font-size: 10px;
+  margin-left: 20px;
+
+}
+.content .link-box .sub-email{
+  width:70%;
+  height: 45px;
+  border: none;
+  font-family: 'Julius sans one';
+  background-color: #f3f4f9;
+  justify-content: center;
+
+}
+.footer-logo .logo-text h1{
+  font-family:'Julius sans one' ;
+  color:#f3f4f9;
+  text-align: center;
+  justify-content: center;
+  font-size:20px;
+  letter-spacing: 10px;
+ 
+
+
+}
+
+}
