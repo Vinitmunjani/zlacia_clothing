@@ -1,1 +1,0 @@
-web: gunicorn zlacia_clothing.wsgi
