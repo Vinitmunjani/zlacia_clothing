@@ -28,7 +28,7 @@ DATABASES = {
         'NAME': 'test',
         'USER': 'vinit',
         'PASSWORD': 'vinit12',
-        'HOST': 'localhost',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
         
     }
